@@ -13,18 +13,18 @@ _start:
 
 	; Movsb/w/d/q
 	; Memory to Memory 
-	cld
-	lea rsi, [HelloWorld]
-	lea rdi, [Copy]
-	movsq
+	cld                   ;clear direction so copy increments forward
+	lea rsi, [HelloWorld] ;move the address of the HelloWorld variable into rsi 
+	lea rdi, [Copy]       ;move the address of the Copy variable into rdi
+	movsq                 ;Move qword (8 bytes) from address RSI to RDI.
 
-	cld
-	lea rsi, [HelloWorld]
-	xor rax, rax
-	mov qword [Copy], rax
-	lea rdi, [Copy]
-	mov rcx, len
-	rep movsb
+	cld                   ;clear direction so copy increments forward direction
+	lea rsi, [HelloWorld] ;move the address of HelloWorld variable in rsi
+	xor rax, rax          ;zeroize the rax
+	mov qword [Copy], rax ;move the rax value (0) to the 8 byte address of the Copy variable
+	lea rdi, [Copy]       ;move the address of the Copy variable into rdi
+	mov rcx, len          ;move the value of len into rcx
+	rep movsb             ;move byte from address of RSI into RDI; repeat until rcx dec's to zero
 
 
 	; stosb/w/d/q
